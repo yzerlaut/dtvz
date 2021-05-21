@@ -21,7 +21,8 @@ def set_plot(graph, ax,
              xlim=None, ylim=None,
              grid=False,
              xcolor=None, ycolor=None,
-             fontsize=None, size=None):
+             fontsize=None, size=None,
+             ax_refs=None):
 
     
     if fontsize is None:
@@ -31,6 +32,9 @@ def set_plot(graph, ax,
     if ycolor is None:
         ycolor = graph.default_color
 
+    if ax_refs is not None:
+        xlim = ax_refs.get_xlim()
+        ylim = ax_refs.get_ylim()
 
     # no ticks if no axis bar
     if not (('top' in spines) or ('bottom' in spines)):
