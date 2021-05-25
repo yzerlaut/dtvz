@@ -43,7 +43,8 @@ def figure(cls,
            figsize=(1.,1.),
            left=1., right=1.,
            bottom=1., top=1.,
-           wspace=1., hspace=1.):
+           wspace=1., hspace=1.,
+           reshape_axes=True):
     
     """
     scales figures according to the specification of "settings.py" (for each graph environment)
@@ -147,7 +148,7 @@ def figure(cls,
                         wspace=dim['wspace'],
                         hspace=dim['hspace'])
 
-    if grid is not None:
+    if (grid is not None) or (reshape_axes is False):
         return fig, AX
     elif len(AX)==1 and (len(AX[0])==1):
         return fig, AX[0][0]
