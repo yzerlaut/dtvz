@@ -72,20 +72,23 @@ class graph_env:
                with_bar_legend=False,
                bar_inset_loc=None,
                with_panel_label=False,
-               shift_up=0., shrink=1.):
+               shift_up=0., shrink=1.,
+               reshape_axes=True):
 
         if with_legend_space:
             fig, ax = df.figure(self,
                                 axes, axes_extents, grid,
                                 right=5.5,
-                                figsize=figsize)
+                                figsize=figsize,
+                                reshape_axes=reshape_axes)
             return fig, ax
             
         elif with_bar_legend:
             fig, ax = df.figure(self,
                                 axes, axes_extents, grid,
                                 right=5,
-                                figsize=figsize)
+                                figsize=figsize,
+                                reshape_axes=reshape_axes)
             acb = self.inset(ax,
                              [1.17, -.08+shift_up, .08, shrink*1.],
                              facecolor=self.facecolor)
@@ -94,7 +97,8 @@ class graph_env:
             fig, AX = df.figure(self,
                                 axes, axes_extents, grid,
                                 np.array(figsize),
-                                left, right, bottom, top, wspace, hspace)
+                                left, right, bottom, top, wspace, hspace,
+                                reshape_axes=reshape_axes)
             if bar_inset_loc is not None:
                 if type(AX) is list:
                     acb = self.inset(AX[-1], bar_inset_loc,
