@@ -48,24 +48,26 @@ if __name__=='__main__':
     from datavyz import ge
 
     fig_name = os.path.join(os.path.expanduser('~'), 'Desktop', 'fig.svg')
-    print(fig_name)
+
     fig1, ax1 = ge.figure()
-    
     ge.scatter(np.arange(10), np.random.randn(10), ax=ax1)
     ge.set_plot(ax1, xlabel='time (s)', ylabel='value (a.u.)')
+    fig1.savefig(fig_name)
+    
     fig2, ax2 = ge.figure()
     ge.scatter(np.arange(10), np.random.randn(10), color=ge.blue, ax=ax2)
     ge.set_plot(ax2, ax_refs=ax1)
+    add_plot_to_svg(fig2, fig_name)
 
-    LOCATIONS, PANELS = [], []
-    for i, fig in enumerate([fig1, fig2]):
-        LOCATIONS.append(os.path.join(gettempdir(), str(i)+'.svg'))
-        fig.savefig(LOCATIONS[i], transparent=True)
-        PANELS.append(sg.Panel(sg.SVG(LOCATIONS[i])).move(0,0))
+    # LOCATIONS, PANELS = [], []
+    # for i, fig in enumerate([fig1, fig2]):
+    #     LOCATIONS.append(os.path.join(gettempdir(), str(i)+'.svg'))
+    #     fig.savefig(LOCATIONS[i], transparent=True)
+    #     PANELS.append(sg.Panel(sg.SVG(LOCATIONS[i])).move(0,0))
 
-    sg.Figure("%.2fcm" % inch2cm(fig.get_size_inches()[0]),
-              "%.2fcm" % inch2cm(fig.get_size_inches()[1]),
-              *PANELS).scale(1).save(fig_name)
+    # sg.Figure("%.2fcm" % inch2cm(fig.get_size_inches()[0]),
+    #           "%.2fcm" % inch2cm(fig.get_size_inches()[1]),
+    #           *PANELS).scale(1).save(fig_name)
 
     export_drawing_as_png(fig_name)
     
