@@ -21,6 +21,28 @@ def export_drawing_as_png(fig_name, dpi=100, background='white'):
     else:
         print('[!!] %s not exported as png' % fig_name)
 
+
+def add_plot_to_svg(fig, svg_fig,
+                    temp_name=os.path.join(gettempdir(), 'temp.svg')):
+    """
+    the two figures need to be identical
+    """
+
+    
+    fig.savefig(temp_name, transparent=True)
+    PANELS = [sg.Panel(sg.SVG(svg_fig)).move(0,0),
+              sg.Panel(sg.SVG(temp_name).move(0,0))]
+              
+
+    sg.Figure("%.2fcm" % inch2cm(fig.get_size_inches()[0]),
+              "%.2fcm" % inch2cm(fig.get_size_inches()[1]),
+              *PANELS).scale(1).save(svg_fig)
+
+    export_drawing_as_png(fig_name)
+    
+    
+
+    
 if __name__=='__main__':
 
     from datavyz import ge
