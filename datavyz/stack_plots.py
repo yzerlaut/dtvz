@@ -38,7 +38,7 @@ def add_plot_to_svg(fig, svg_fig,
               "%.2fcm" % inch2cm(fig.get_size_inches()[1]),
               *PANELS).scale(1).save(svg_fig)
 
-    export_drawing_as_png(fig_name)
+    export_drawing_as_png(svg_fig)
     
     
 
