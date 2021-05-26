@@ -27,7 +27,6 @@ def add_plot_to_svg(fig, svg_fig,
     """
     the two figures need to be identical
     """
-
     
     fig.savefig(temp_name, transparent=True)
     PANELS = [sg.Panel(sg.SVG(svg_fig)).move(0,0),
@@ -38,8 +37,6 @@ def add_plot_to_svg(fig, svg_fig,
               "%.2fcm" % inch2cm(fig.get_size_inches()[1]),
               *PANELS).scale(1).save(svg_fig)
 
-    export_drawing_as_png(svg_fig)
-    
     
 
     
