@@ -482,9 +482,11 @@ class graph_env:
                     dpi=dpi, transparent=transparent,
                     facecolor=facecolor)
         
-    def save_on_desktop(self, fig, figname='temp.svg'):
-        self.savefig(fig, desktop+figname)
-
+    def save_on_desktop(self, fig, figname='temp.svg', dpi=None):
+        if figname.endswith('.png'):
+            self.savefig(fig, desktop+figname, dpi=dpi)
+        else:
+            self.savefig(fig, desktop+figname)
 
     def gcf(self):
         return plt.gcf()
