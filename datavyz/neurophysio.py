@@ -68,12 +68,12 @@ def Ca_trace_plot(graph, Data,
 
 if __name__=='__main__':
 
-
     from datavyz import ge
     
     data = {}
     for i in range(30):
         data['cell%i' % (i+1)] = np.random.randn(1000)
-        
-    ge.Ca_trace_plot(data, Tbar_label='X-s', title='Ca activity')
+
+    fig, ax = ge.figure(axes_extents=(5,5), top=0., bottom=0., right=0.5, left=0.1)
+    ge.Ca_trace_plot(data, Tbar_label='X-s', title='Ca activity', ax=ax)
     ge.show()

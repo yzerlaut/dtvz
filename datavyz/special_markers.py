@@ -24,16 +24,16 @@ def getMarker(i):
 
 if __name__=='__main__':
 
-    from datavyz import ges, gem
-    fig, ax= gem.figure()
+    from datavyz import ge
+    fig, ax= ge.figure()
 
     for i, mi in enumerate(markers):
         # plt.plot(x[i], y[i], "b", alpha=0.5, marker=getRandomMarker(), markersize=randint(16,26,1))
-        ax.plot(x[i], y[i]+50, "m", alpha=0.5, marker=getMarker(i), markersize=3)
+        ax.plot(x[i], y[i]+50, "m", alpha=0.5, marker=getMarker(i), markersize=5)
         # Let's see if their "center" is located where we expect them to be...
-        ax.plot(x[i], y[i]+100, "y", alpha=0.5, marker=getMarker(i), markersize=3)
-        ax.plot(x[i], y[i]+100, "k+", markersize=12, markeredgewidth=3)
+        ax.plot(x[i], y[i]+100, ge.red, alpha=0.5, marker=getMarker(i), markersize=8)
+        ax.plot(x[i], y[i]+100, "k+", markersize=5, markeredgewidth=1)
 
 
-    gem.set_plot(ax, xlabel='xlabel', ylabel='ylabel', title='special marker demo')
-    gem.show()
+    ge.set_plot(ax, xlabel='xlabel', ylabel='ylabel', title='special marker demo')
+    ge.show()
