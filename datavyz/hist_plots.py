@@ -18,10 +18,13 @@ def hist(graph,
          color=None,label='',
          lw=0.3, alpha=1.,
          xlabel='', ylabel='count', title='',
-         normed=False,
+         normed=False, log=False,
          fig_args={}, axes_args={}):
     
     hist, be = np.histogram(x, bins=bins, density=normed)
+    if log:
+        hist = np.clip(hist, np.min(hist[hist>0]), hist.max())
+        axes_args['yscale'] = 'log'
 
     if color is not None:
         facecolor = color
@@ -57,7 +60,7 @@ if __name__=='__main__':
 
     from datavyz import ge
 
-    fig, ax = ge.hist(np.random.randn(100), xlabel='some value')
+    fig, ax = ge.hist(np.random.randn(100), xlabel='some value', log=True)
     
-    ge.savefig(fig, 'docs/hist-plot.png')
-
+    # ge.savefig(fig, 'docs/hist-plot.png')
+    ge.show()
