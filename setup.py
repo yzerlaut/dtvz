@@ -28,12 +28,12 @@ setup(
     ],
     keywords='data visualization matplotlib',
     packages=find_packages(),
-    install_requires=[
-        "matplotlib",
-        "svgutils",
-        "numpy",
-        "scipy",
-        "argparse",
-        "scikit-image"
-    ]
+    # install_requires=[
+    #     "matplotlib",
+    #     "svgutils",
+    #     "numpy",
+    #     "scipy",
+    #     "argparse",
+    #     "scikit-image"
+    # ]
 )

@@ -422,6 +422,13 @@ class graph_env:
         return time_freq_plot(self, t, freqs, data, coefs, **args)
 
     ################################################
+    ###### stat plots ########################
+    ################################################
+
+    def two_variable_analysis(self, first_observations, second_observations, **args):
+        return scatter_plots.two_variable_analysis(first_observations, second_observations, cls=self, **args)
+
+    ################################################
     ###### electrophy plots ########################
     ################################################
 

@@ -7,6 +7,7 @@ from datavyz.adjust_plots import *
 
 def two_variable_analysis(first_observations,
                           second_observations,
+                          cls=None,
                           with_correl_annotation=True,
                           ylabel='y-value', xlabel='x-value',
                           colormap=None, ms=4):
@@ -14,10 +15,13 @@ def two_variable_analysis(first_observations,
     if len(first_observations)!=len(second_observations):
         print('Pb with sample size !! Test is not applicable !!')
 
+    if cls is None:
+        from datavyz import ge as cls
+    
     if colormap is None:
         def colormap(x):return 'k'
         
-    fig, ax = figure()
+    fig, ax = cls.figure(right=4.)
     
     for i in range(len(first_observations)):
         ax.plot([first_observations[i]], [second_observations[i]], 'o', color=colormap(i/(len(first_observations)-1)), ms=ms)
@@ -27,11 +31,11 @@ def two_variable_analysis(first_observations,
         lin = np.polyfit(first_observations, second_observations, 1)
         x = np.linspace(np.min(first_observations), np.max(first_observations), 3)
         ax.plot(x, np.polyval(lin, x), 'k:', lw=1)
-        ax.annotate('Pearson correlation:\n c=%.2f, p=%.2f' % (c, pval), (.99,.4), xycoords='axes fraction')
+        cls.annotate(ax, '  Pearson\ncorrelation:\n c=%.2f,\n p=%.2f' % (c, pval), (.99,1.), va='top')
     else:
         c, pval = 0., 1.
         
-    set_plot(ax, ylabel=ylabel, xlabel=xlabel)
+    cls.set_plot(ax, ylabel=ylabel, xlabel=xlabel)
     
     return fig, ax, c, pval
 
@@ -42,18 +46,18 @@ def single_curve(ax, x, y, sx, sy,
                  lw=0, ms=3, elw=1):
     if (sy is None) and (sx is None):
         ax.errorbar(x, y, fmt='o-',
-                  marker=marker, color=color,
+                  color=color,
                   lw=lw, ms=ms, label=label)
     elif (sy is None):
-        ax.errorbar(x, y, xerr=sx, fmt='o-',
+        ax.errorbar(x, y, xerr=sx,
                     marker=marker, color=color,
                     lw=lw, ms=ms, elinewidth=elw, label=label)
     elif (sx is None):
-        ax.errorbar(x, y, yerr=sy, fmt='o-',
+        ax.errorbar(x, y, yerr=sy,
                     marker=marker, color=color,
                     lw=lw, ms=ms, elinewidth=elw, label=label)
     else:
-        ax.errorbar(x, y, xerr=sx, yerr=sy, fmt='o-',
+        ax.errorbar(x, y, xerr=sx, yerr=sy,
                     marker=marker, color=color,
                     lw=lw, ms=ms, elinewidth=elw, label=label)
 
@@ -98,8 +102,9 @@ if __name__=='__main__':
                          xlabel='xlabel (xunit)',
                          ylabel='ylabel (yunit)',
                          title='datavyz demo plot')
-    ge.savefig(fig, 'docs/scatter.png')
+    # ge.savefig(fig, 'docs/scatter.png')
 
-    # two_variable_analysis(np.random.randn(10), np.random.randn(10),
-    #                       colormap=viridis)
+    ge.two_variable_analysis(np.random.randn(10), np.random.randn(10),
+                             colormap=viridis)
+    ge.show()
     
