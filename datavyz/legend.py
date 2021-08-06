@@ -51,6 +51,7 @@ def bar_legend(graph, stuff,
 
     bar_legend_args['orientation'] = orientation
     bar_legend_args['label'] = label
+    bar_legend_args['labelpad'] = labelpad
         
     set_bar_legend(graph, ax_cb, cb, **bar_legend_args)
     
