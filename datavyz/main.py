@@ -452,7 +452,7 @@ class graph_env:
         """
         List = []
         for ax in AX:
-            if type(AX) is list:
+            if type(ax) is list:
                 List = List+ax
             else:
                 List.append(ax)        
