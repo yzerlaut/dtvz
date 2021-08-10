@@ -66,7 +66,7 @@ def hist2d(graph, x, y,
            xlabel='', ylabel='', title='',
            normed=False, log=False,
            with_colorbar=False, ax_colorbar=None,
-           fig_args={}, axes_args={}):
+           fig_args=dict(figsize=(1.,1.1)), axes_args={}):
     """
     based on the numpy.histogram2d function
     """
@@ -77,7 +77,7 @@ def hist2d(graph, x, y,
         axes_args['yscale'] = 'log'
 
     if ax is None and with_colorbar:
-        fig, ax = graph.figure(**fig_args, right=10.)
+        fig, ax = graph.figure(**fig_args, right=7.)
         ax_colorbar = graph.inset(fig, [.65,.4,.03,.4])
     elif ax is None:
         fig, ax = graph.figure(**fig_args)
@@ -89,7 +89,8 @@ def hist2d(graph, x, y,
 
     if ax_colorbar is not None:
 
-        ticks = [int(hist.min()), int(.5*(hist.max()+hist.min())), int(hist.max())]
+        # ticks = [int(hist.min()), int(.5*(hist.max()+hist.min())), int(hist.max())]
+        ticks = [int(hist.min()), int(hist.max())]
         graph.bar_legend(None, colormap=colormap, ax_colorbar=ax_colorbar,
                          bounds=[hist.min(), int(hist.max())],
                          ticks = ticks, ticks_labels = ['%i'%t for t in ticks],
@@ -113,14 +114,11 @@ if __name__=='__main__':
     from datavyz import ge
 
     # 1d
-    # fig, ax = ge.hist(np.random.randn(100), bins=[-3,-1,0.1,0.2,2,5], xlabel='some value', log=False)
+    fig, ax = ge.hist(np.random.randn(100), bins=[-3,-1,0.1,0.2,2,5], xlabel='some value', log=False)
 
     # 2d
-    # fig, ax = ge.hist2d(np.random.randn(100), np.random.randn(100),
-    #                     bins=10)
-
-    fig, ax = hist2d(ge, np.random.randn(10), 10.*np.random.randn(10),
-                     bins=10, with_colorbar=True)
+    fig, ax = ge.hist2d(np.random.randn(10), 10.*np.random.randn(10),
+                        bins=10, with_colorbar=True)
     
     # ge.savefig(fig, 'docs/hist-plot.png')
     ge.show()
