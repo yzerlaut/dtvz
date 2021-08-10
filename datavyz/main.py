@@ -13,7 +13,7 @@ import datavyz.adjust_plots as ap
 from datavyz import annotations, line_plots, scatter_plots, legend, features_plot, cross_correl_plot
 from datavyz.cross_correl_plot import cross_correl_plot_func
 from datavyz.parallel_plots import parallel_plot, components_plot
-from datavyz.hist_plots import hist
+from datavyz.hist_plots import hist, hist2d
 from datavyz.inset import inset
 from datavyz.surface_plots import twoD_plot, matrix
 from datavyz.bar_plots import bar, related_samples_two_conditions_comparison, unrelated_samples_two_conditions_comparison
@@ -270,6 +270,8 @@ class graph_env:
     # histogram 
     def hist(self, x, **args):
         return hist(self, x, **args)
+    def hist2d(self, x, y, **args):
+        return hist2d(self, x, y, **args)
 
     def boxplot(self, data,
                 fig_args=dict(figsize=(.6,1.)),
@@ -303,8 +305,8 @@ class graph_env:
     def twoD_plot(self, x, y, z, **args):
         return twoD_plot(self, x, y, z, **args)
 
-    def matrix(self, x, **args):
-        return matrix(self, x, **args)
+    def matrix(self, z, **args):
+        return matrix(self, z, **args)
 
     # image plot
     def image(self, X, cmap=binary_r, alpha=1., ax=None, title=''):

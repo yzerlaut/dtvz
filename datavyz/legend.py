@@ -10,7 +10,7 @@ from datavyz.annotations import set_fontsize
 
 def bar_legend(graph, stuff,
                X = None, continuous=False,
-               inset=dict(rect=[.72,.3,.03,.5], facecolor=None),
+               ax_colorbar=None, colorbar_inset=dict(rect=[.72,.3,.03,.5], facecolor=None),
                colormap=mpl.cm.copper,
                bar_legend_args={},
                label='',
@@ -27,11 +27,12 @@ def bar_legend(graph, stuff,
     """
     if X is None:
         continuous = True
-        
-    ax_cb = graph.inset(stuff, **inset)
+
+    if ax_colorbar is None:
+        ax_colorbar = graph.inset(stuff, **inset)
 
     if continuous:
-        cb = build_bar_legend_continuous(ax_cb, colormap,
+        cb = build_bar_legend_continuous(ax_colorbar, colormap,
                                          bounds=bounds,
                                          ticks=ticks,
                                          ticks_labels=ticks_labels,
@@ -39,7 +40,7 @@ def bar_legend(graph, stuff,
                                          alpha=alpha,
                                          scale=scale)
     else:
-        cb = build_bar_legend(ax_cb, X,
+        cb = build_bar_legend(ax_colorbar, X,
                               colormap,
                               scale=scale,
                               bounds=bounds,
@@ -53,7 +54,7 @@ def bar_legend(graph, stuff,
     bar_legend_args['label'] = label
     bar_legend_args['labelpad'] = labelpad
         
-    set_bar_legend(graph, ax_cb, cb, **bar_legend_args)
+    set_bar_legend(graph, ax_colorbar, cb, **bar_legend_args)
     
     return cb
 

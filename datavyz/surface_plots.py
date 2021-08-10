@@ -91,8 +91,8 @@ def twoD_plot(graph,
     return fig, ax, acb
     
 
-def matrix(graph,
-           x, y=None, z=None,
+def matrix(graph, z,
+           x=None, y=None, 
            ax=None, acb=None, fig=None,
            diverging=False,
            colormap=cm.viridis,
@@ -109,8 +109,7 @@ def matrix(graph,
            # other args
            interpolation='none'):
 
-    if (z is None) and (y is None):
-        z = x
+    if (x is None) and (y is None):
         x, y = np.meshgrid(np.arange(z.shape[0]), np.arange(z.shape[1]), indexing='ij')
         
     if (ax is None) and (acb is None):
