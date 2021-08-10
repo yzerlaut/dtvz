@@ -36,11 +36,11 @@ def hist(graph,
         fig = plt.gcf()
 
     if orientation=='vertical':
-        ax.barh(.5*(be[1:]+be[:-1]), hist, height=be[1]-be[0], 
+        ax.barh(.5*(be[1:]+be[:-1]), hist, height=be[1:]-be[:-1],
                 edgecolor=edgecolor, facecolor=facecolor, lw=lw, label=label,
                 alpha=alpha)
     elif orientation=='horizontal':
-        ax.bar(.5*(be[1:]+be[:-1]), hist, width=be[1]-be[0], 
+        ax.bar(.5*(be[1:]+be[:-1]), hist, width=be[1:]-be[:-1], 
                 edgecolor=edgecolor, facecolor=facecolor, lw=lw, label=label,
                 alpha=alpha)
 
@@ -60,7 +60,14 @@ if __name__=='__main__':
 
     from datavyz import ge
 
-    fig, ax = ge.hist(np.random.randn(100), xlabel='some value', log=True)
-    
+    fig, ax = ge.hist(np.random.randn(100), bins=[-3,-1,0.1,0.2,2,5], xlabel='some value', log=False)
     # ge.savefig(fig, 'docs/hist-plot.png')
     ge.show()
+
+
+
+
+
+
+
+
