@@ -117,8 +117,8 @@ if __name__=='__main__':
     fig, ax = ge.hist(np.random.randn(100), bins=[-3,-1,0.1,0.2,2,5], xlabel='some value', log=False)
 
     # 2d
-    fig, ax = ge.hist2d(np.random.randn(10), 10.*np.random.randn(10),
-                        bins=10, with_colorbar=True)
+    fig, ax = ge.hist2d(np.random.randn(100), 10.*np.random.randn(100),
+                        bins=(np.linspace(-2,2,4),np.linspace(-20,20,4)), with_colorbar=True)
     
     # ge.savefig(fig, 'docs/hist-plot.png')
     ge.show()
