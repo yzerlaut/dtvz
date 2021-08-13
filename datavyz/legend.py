@@ -29,7 +29,7 @@ def bar_legend(graph, stuff,
         continuous = True
 
     if ax_colorbar is None:
-        ax_colorbar = graph.inset(stuff, **inset)
+        ax_colorbar = graph.inset(stuff, **colorbar_inset)
 
     if continuous:
         cb = build_bar_legend_continuous(ax_colorbar, colormap,
